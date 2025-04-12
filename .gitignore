@@ -1,0 +1,50 @@
+# Environment variables
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Project specific
+# Ignore all files in data directories
+data/mp3_conversions/*
+data/transcripts/*
+data/cache/*
+data/results/*
+
+# But keep the directory structure
+!data/mp3_conversions/.gitkeep
+!data/transcripts/.gitkeep
+!data/cache/.gitkeep
+!data/results/.gitkeep
+!data/.gitkeep
+
+# Audio files
+*.m4a
+*.mp3
+*.wav
+
+# Transcript and cache files
+*.txt
+*.json
+*.md
+!requirements.txt  # Don't ignore requirements.txt
+!LICENSE.md       # Don't ignore LICENSE.md
