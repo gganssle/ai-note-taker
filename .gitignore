@@ -46,5 +46,6 @@ data/results/*
 *.txt
 *.json
 *.md
-!requirements.txt  # Don't ignore requirements.txt
-!LICENSE.md       # Don't ignore LICENSE.md
+!requirements.txt      # Don't ignore requirements.txt
+!requirements-dev.txt  # Don't ignore requirements-dev.txt
+!LICENSE.md           # Don't ignore LICENSE.md

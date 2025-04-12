@@ -22,7 +22,7 @@ class VoiceMemoAnalyzer:
     This class orchestrates the entire process of analyzing a voice memo:
     1. Converting audio to MP3 format if needed
     2. Transcribing the audio using OpenAI's Whisper
-    3. Analyzing the transcript using GPT-4
+    3. Analyzing the transcript using GPT-4o
     4. Saving and caching results
     
     The results are saved in both JSON and Markdown formats, and the system
@@ -153,16 +153,17 @@ class VoiceMemoAnalyzer:
             print(f"\nError: {results['error']}")
             return
 
-        print("\n=== Action Items ===")
-        for item in results['action_items']:
-            print(f"• {item}")
-        
-        print("\n=== Overall Summary ===")
-        print(results['overall_summary'])
+        print("\n=== Full Transcript ===")
+        print(results['formatted_transcript'])
         
         print("\n=== Key Moments ===")
         for moment in results['key_moments']:
             print(f"[{moment['timestamp']}] {moment['summary']}")
         
-        print("\n=== Full Transcript ===")
-        print(results['formatted_transcript'])
+        print("\n=== Overall Summary ===")
+        print(results['overall_summary'])
+
+        print("\n=== Action Items ===")
+        for item in results['action_items']:
+            print(f"• {item}")
+

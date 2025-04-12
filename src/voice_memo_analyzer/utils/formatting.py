@@ -1,4 +1,4 @@
-"""Text formatting utilities."""
+"""Utility functions for formatting transcripts and timestamps."""
 
 def format_timestamp(seconds: float) -> str:
     """Convert seconds to MM:SS format."""
@@ -11,6 +11,5 @@ def format_transcript_with_timestamps(response) -> str:
     formatted_lines = []
     for segment in response.segments:
         start_time = format_timestamp(segment.start)
-        text = segment.text.strip()
-        formatted_lines.append(f"[{start_time}] {text}")
+        formatted_lines.append(f"[{start_time}] {segment.text}")
     return "\n".join(formatted_lines)
