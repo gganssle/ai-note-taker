@@ -1,18 +1,50 @@
-"""Analyzes transcribed conversations using OpenAI's GPT models."""
+"""Conversation analysis module using OpenAI's GPT models.
+
+This module handles the analysis of transcribed conversations using OpenAI's GPT-4
+model to extract key information like action items, summaries, and important moments.
+"""
 
 import json
 from pathlib import Path
 from openai import OpenAI
 
 class ConversationAnalyzer:
+    """Analyzes transcribed conversations using OpenAI's GPT models.
+    
+    This class is responsible for processing transcribed text to extract:
+    - Action items that need to be taken
+    - Overall conversation summary
+    - Key moments with their timestamps
+    
+    It uses GPT-4 to analyze the text and structure the results in a consistent format.
+    """
+
     def __init__(self, client: OpenAI):
+        """Initialize the analyzer with an OpenAI client.
+        
+        Args:
+            client: An initialized OpenAI client object
+        """
         self.client = client
 
     def analyze_transcript(self, formatted_transcript: str) -> dict:
-        """Analyze the transcript using GPT-4.
+        """Analyze a formatted transcript and extract key information.
+        
+        Uses GPT-4 to analyze the transcript and extract structured information
+        about the conversation, including action items, key moments, and a
+        summary.
+        
+        Args:
+            formatted_transcript: The transcript text with timestamps
         
         Returns:
-            dict: Analysis results containing key moments, summary, and action items
+            dict: Analysis results containing:
+                - action_items: List of strings, each a complete task
+                - overall_summary: String summarizing the conversation
+                - key_moments: List of dicts with 'timestamp' and 'summary' keys
+        
+        Raises:
+            Exception: If the OpenAI API call fails
         """
         print("Analyzing conversation...")
         analysis_prompt = f"""
@@ -41,5 +73,13 @@ class ConversationAnalyzer:
             messages=[{"role": "user", "content": analysis_prompt}],
             temperature=0.3
         )
-
-        return json.loads(response.choices[0].message.content)
+        
+        try:
+            return json.loads(response.choices[0].message.content)
+        except Exception as e:
+            print(f"Error parsing analysis results: {e}")
+            return {
+                "action_items": [],
+                "overall_summary": "Error analyzing transcript",
+                "key_moments": []
+            }
