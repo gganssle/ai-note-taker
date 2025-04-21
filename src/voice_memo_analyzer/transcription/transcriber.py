@@ -55,8 +55,9 @@ class Transcriber:
                     language="en"
                 )
             
+            raw_transcript = response.text
             formatted_transcript = format_transcript_with_timestamps(response)
-            return response.text, formatted_transcript
+            return raw_transcript, formatted_transcript
             
         except Exception as e:
             print(f"Error transcribing audio: {e}")
